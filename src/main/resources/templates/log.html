@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>a{TEXT-DECORATION:none}</style>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/Log.css?v=00002">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+</head>
+<body>
+<div class="h">
+    <a href="news.html">首页</a>
+    <a href="contact.html">关于我们</a>
+</div>
+<div class="a">
+
+    <div class="all">
+
+        <div class="first">
+            <span>登录</span>
+        </div>
+
+        <div class="b">
+            <img src="../static/images/2.png" class="dog">
+        </div>
+
+        <div class="input">
+            <input id="userName"  type="text" placeholder="账号">
+            <input id="password"  type="password" placeholder="密码">
+            <div class="log">
+                <input type="submit" value="登录" id="goSubmit">
+            </div>
+        </div>
+
+        <div class="register">
+            <a href="register.html">点击注册</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $('#goSubmit').click(function () {
+                var userName=$("#userName").val();
+                var password=$("#password").val();
+                    $.ajax(
+                        {
+                            url: "http://localhost:8091/user/login",
+                            type: "post",
+                            data: {
+                                "userName": userName,
+                                "password": password,
+                            },
+                            success: function (res) {
+                                if (res == 1) {
+                                    location.href = "http://localhost:8091/news.html"
+                                } else {
+                                    alert("登录失败!");
+                                }
+                            },
+                            error: function () {}
+                        })
+
+
+            })
+
+    </script>
+</div>
+
+
+<!--<div class="foot">-->
+    <!--<div class="first">-->
+        <!--<p>心悦客服</p>-->
+        <!--<div class="f">-->
+            <!--<p>热线:18628395678</p>-->
+            <!--<p>邮箱:123456789@qq.com</p>-->
+            <!--<p>qq  :1101625235</p>-->
+            <!--<p>微信:123456789</p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="second">-->
+        <!--<p>关于心悦</p>-->
+        <!--<div class="s">-->
+            <!--<p><a href="">关于我们</a></p>-->
+            <!--<p><a href="">免责声明</a></p>-->
+            <!--<p><a href="">用户协议</a></p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="third" >-->
+        <!--<div  class="w">-->
+            <!--<img style="height:140px;width: 140px" src="../images/shop/wei.jpg">-->
+            <!--<span>公众号</span>-->
+        <!--</div>-->
+        <!--<div class="x">-->
+            <!--<img style="height:140px;width: 140px" src="../images/shop/xin.jpg">-->
+            <!--<span>微信群</span>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<hr>-->
+<!--<div class="bu">-->
+    <!--<img src="../images/shop/bu.png">-->
+<!--</div>-->
+
+
+</body>
+</html>

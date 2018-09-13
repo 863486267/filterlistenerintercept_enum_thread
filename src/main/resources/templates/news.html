@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <style>a{TEXT-DECORATION:none}</style>
+
+    <title>新闻</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/News.css">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../static/plugin/uEditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../static/plugin/uEditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="../static/plugin/uEditor/lang/zh-cn/zh-cn.js"></script>
+
+</head>
+<body>
+<div  class="right">
+    <div class="lr"  >
+        <a href="log.html">登录</a>
+        <a href="register.html">注册</a>
+        <a href="editor.html">发表新闻</a>
+        <input style="background-color: transparent;outline: none;border: none;color: #fff" type="submit" value="登出" id="goSubmit">
+    </div>
+
+    <div class="mo"  >
+        <a href="news.html">新闻</a>
+        <a href="forum.html">论坛</a>
+        <a href="shop/host.html">商城</a>
+        <a href="contact.html">联系我们</a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="pic">
+        <img src="../static/images/pic.png">
+    </div>
+    <div class="news">
+        <ul class="news_list">
+
+        </ul>
+    </div>
+
+    <div class="pageNation">
+        <button id="previous">上一页</button>
+        <ul>
+            <li class="page_first"><a href="javascript:void(0)"></a></li>
+            <li class="active"><a href="javascript:void(0)"></a></li>
+            <li class="page_last"><a href="javascript:void(0)"></a></li>
+        </ul>
+        <button id="next">下一页</button>
+    </div>
+</div>
+
+
+<div class="foot">
+    <div class="first">
+        <p>心悦客服</p>
+        <div class="f">
+            <p>热线:18628395678</p>
+            <p>邮箱:123456789@qq.com</p>
+            <p>qq  :1101625235</p>
+            <p>微信:123456789</p>
+        </div>
+    </div>
+    <div class="second">
+        <p>关于心悦</p>
+        <div class="s">
+            <p><a href="contact.html">关于我们</a></p>
+            <p><a href="/templates/contact.html">免责声明</a></p>
+            <p><a href="/templates/contact.html">用户协议</a></p>
+        </div>
+    </div>
+    <div class="third" >
+        <div  class="w">
+            <img style="height:140px;width: 140px" src="../static/images/shop/wei.jpg">
+            <span>公众号</span>
+        </div>
+        <div class="x">
+            <img style="height:140px;width: 140px" src="../static/images/shop/xin.jpg">
+            <span>微信群</span>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="bu">
+    <img src="../static/images/shop/bu.png">
+</div>
+
+
+
+</body>
+<script>
+    $(function ( ) {
+        var page=1;  //当前页
+        var total;   //总页数
+        $('.news_list').delegate("li","click",function () {
+            var id=this.className;
+            console.log(id);
+            location.href="newsdiscuss.html?id="+id;
+        })
+        var getData=function(param){
+            $.ajax({
+                type:'post',
+                url:'http://localhost:8091/news/get',
+                data:{
+                    pn:param
+                },
+                success:function(res){
+                    console.log(res);
+                    total=res.code;
+                    console.log("page:"+page+",total:"+total);
+                    if(page===total){
+                        if(total<2) {
+                            $('#previous').attr('disabled',true);
+                        } else{
+                            $('#previous').attr('disabled',false);
+                        }
+                        $('#next').attr('disabled',true);
+                        console.log("total")
+                    }else if(page===1){
+                        if(total<2){
+                            console.log("1");
+                            $('#next').attr('disabled',true);
+                        }else {
+                            $('#next').attr('disabled',false);
+                        }
+                        $('#previous').attr('disabled',true);
+                    }else {
+                        $('#next').attr('disabled',false);
+                        $('#previous').attr('disabled',false);
+                    }
+                    getPage(total);
+                    setActive(page);
+                    var data=res.result;
+                    var str = "";
+                    for (var i=0;i<data.length;i++){
+                        str = str+'<li class="'+data[i].id+'"><a href="javascript:void(0)">'+data[i].newsTitle+'</a><span>'+data[i].newsTime+'</span></li>';
+                    }
+                    console.log(str);
+                    $('.news_list').html(str);
+                },
+                error:function (res) {
+                    //返回上个浏览页面处理。
+                    alert("你没有权限访问哦！点击确定返回到上一级！");
+                    window.history.back(-1);
+                    console.log(res);
+                }
+            })
+        }
+        getData(page);
+        var setActive=function (page) {
+            $(".pageNation ul li a").removeClass("bold");
+            var a = $('.page_first a').text();
+            var b= $('.page_last a').text();
+            var c=$('.active a').text();
+            if(parseInt(a) ==page){
+                $('.page_first a').addClass('bold');
+            }
+            if(parseInt(b) ==page){
+                $('.page_last a').addClass('bold');
+            }
+            if(parseInt(c) ==page){
+                $('.active a').addClass('bold');
+            }
+        }
+        var getPage = function (total) {
+            var count = total;
+            if(count===1){
+                $('.active a').text(1);
+            }else if(count===2){
+                $('.page_first a').text(1);
+                $('.active a').text(2)
+            }else if(count===3){
+                $('.page_first a').text(1);
+                $('.active a').text(2);
+                $(".page_last a").text(3);
+            }else if(page>=2&&count>=4){
+                if(page===count){
+                    $('.page_first a').text(page-2);
+                    $(".active a").text(page-1);
+                    $('.page_last a').text(page);
+                }else{
+                    $('.page_first a').text(page-1);
+                    $('.page_last a').text(page+1);
+                }
+
+            }else if(page===1){
+                $('.page_first a').text(1);
+                $('.active a').text(2);
+                $(".page_last a").text(3);
+            }
+        }
+        $('#previous').click(function () {
+            page=page-1;
+            getData(page);
+
+        })
+        $('#next').click(function () {
+            page=page+1;
+            getData(page);
+        })
+        $('.pageNation ul li').click(function () {
+            page = parseInt(this.innerText);
+            getData(page);
+        })
+    })
+
+    $('#goSubmit').click(function () {
+        $.ajax(
+            {
+                url: "http://localhost:8091/user/logOut",
+                type: "post",
+                data: {
+                },
+                success: function (res) {
+                        location.href = "http://localhost:8091/log.html"
+                },
+                error: function () {}
+            })
+
+
+    })
+</script>
+</html>

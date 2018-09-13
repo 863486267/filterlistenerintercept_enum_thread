@@ -1,0 +1,34 @@
+*,div{ margin:0;padding: 0;}
+body{background-color: #dddddd;}
+.h{font-size: small ;text-align: right;background-color:#73767b;padding-top: 10px;padding-right: 20px;padding-bottom: 40px}
+.h>a{margin-right: 20px;color: white}
+.all{ height:350px;margin:0 auto;max-width: 450px;text-align: center;border: 1px solid #3a3a3a;background-color: white;border-radius: 7px}
+.first{float: left;text-align: left;padding-bottom: 100px;padding-top: 5px;padding-left: 5px}
+.first>p{margin-left: 5px;margin-top: 5px}
+.register {padding-right: 40px;padding-bottom: 10px;font-size: small ;color: #eee;text-align: right}
+.dog{position: relative;top: 80px;border-radius:50%;}
+input{display: block;border:0;border-bottom: 2px solid #dddddd;margin:20px;padding: 5px 5px 5px 20px;outline:none;}
+input[type="password"]{background: url("../images/password.png")no-repeat left;}
+input[type="text"]{background: url("../images/shop/home.png")no-repeat left;}
+input[type="submit"]{padding-left: 84px;padding-right:84px;border-radius: 10px;padding-top: 5px;padding-bottom: 5px;margin-top: 20px}
+.input{padding-left: 100px;padding-top: 90px}
+.a{padding-top: 100px;background-color: #dddddd;padding-bottom: 850px}
+.b{background-color:#ffffff}
+
+.foot{text-align: center;margin-top:420px;font-size: small}
+.first{display: inline-block;}
+.f{margin-top: 50px}
+.f>p{padding-bottom: 16px}
+.second{display: inline-block;margin-left: 170px;}
+.second>p{padding-bottom: 88px}
+.s>p{padding-bottom: 10px}
+.goods>a{margin-left: 30px;}
+.goods>img{margin-left: 100px;margin-right: 100px;padding-right: 100px}
+.third{display: inline-block;padding-left: 90px}
+.w{display: inline-block;margin-left: 50px;}
+.w>span{margin-right: 40px}
+.x>span{margin-right: 40px}
+.x{display: inline-block;margin-left: 50px}
+.goods>p{margin-left: 20px;margin-top: 10px}
+.third>div>span{display: block;padding: 0 0 30px 45px;}
+.bu{background-color: #ececec;text-align: center;padding-bottom: 20px;padding-top: 20px}
