@@ -9,6 +9,6 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD,ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented()
-public @interface Premission {
+public @interface Permission {
     boolean isPath() default false;
 }

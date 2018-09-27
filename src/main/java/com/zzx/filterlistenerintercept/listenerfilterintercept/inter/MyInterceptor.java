@@ -17,7 +17,7 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler.getClass().isAssignableFrom(HandlerMethod.class)) {
                 HandlerMethod method = (HandlerMethod) handler;
-                Premission premission = method.getMethodAnnotation(Premission.class);
+                Permission premission = method.getMethodAnnotation(Permission.class);
                 if ((premission == null) || (premission.isPath())) {
                     return true;
                 } else {

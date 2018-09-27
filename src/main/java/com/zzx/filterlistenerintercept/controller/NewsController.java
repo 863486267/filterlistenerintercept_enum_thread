@@ -4,12 +4,11 @@ package com.zzx.filterlistenerintercept.controller;
 import com.zzx.filterlistenerintercept.dao.NewsDao;
 import com.zzx.filterlistenerintercept.entity.NewsEntity;
 import com.zzx.filterlistenerintercept.implement.INewsService;
-import com.zzx.filterlistenerintercept.listenerfilterintercept.inter.Premission;
+import com.zzx.filterlistenerintercept.listenerfilterintercept.inter.Permission;
 import com.zzx.filterlistenerintercept.tool.ResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,7 +33,7 @@ public class NewsController {
      * @param pn
      * @return
      */
-    @Premission(isPath =true)
+    @Permission(isPath =true)
     @CrossOrigin(value = {"*"})
     @PostMapping("/get")
     public ResultWrapper getNews(@RequestParam(value = "pn")int pn,HttpServletResponse response){
@@ -81,7 +80,7 @@ public class NewsController {
      * @param title
      * @return
      */
-    @Premission(isPath =true)
+    @Permission(isPath =true)
     @RequestMapping(value = "/publish",method = RequestMethod.POST)
     public int createNews(HttpServletRequest request, HttpServletResponse response, @RequestParam String content, @RequestParam String title){
         HttpSession session = request.getSession();
